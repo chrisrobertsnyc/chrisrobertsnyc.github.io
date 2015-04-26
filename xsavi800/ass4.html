@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 <title>Assignment 4</title>
 <style>
@@ -21,104 +20,67 @@ html, body {
 <!--Load JQuery-->
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 </head>
-
 <body>
 <div id="map"></div>
 <script>
 //Map functionality:
-	//click on a neighborhood
-	//retrieve neighborhood name
-	//retrieve area size of neighborhood (measurement: area)
-	//find number of neighboring neighborhoods (transformation: buffer; aggregation: count)
-	
+	//retrieve area size of neighborhood (Measurement: area)
+	//establish buffer around neighborhoods (Transformation: buffer)
+    //find all points of the neighborhood/neighborhood buffer (Misc: explode)
+    //find count of exloded points in all polygons (Aggregation: count)
+    //find all polygons that have at least one exploded point (Data: remove)
+    //add these polygons to the map as neighboring neighborhoods
 $(document).ready(function(){
-
 	//initialize map
 	var map = L.map('map', {
 		center: [40.651978, -73.9385264],
 		zoom: 11
 	});
-	
 	//initialize and add basemap
 	L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
     attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
     maxZoom: 18
 	}).addTo(map);
-	
-	//var for neighborhood name, area
-	var neighborhoodName;
-	var neighborhoodArea;
-	
-	//create empty layer for TURF buffer
-	turfLayerBuffer = L.geoJson(null, {
-		style: {
-			fillColor: 'orange',
-			stroke: false
-		}
-	}).addTo(map);
-	
-		//create empty layer for TURF buffer
-	turfLayerCenter = L.geoJson(null, {
+	//create empty layer for TURF remove
+	turfLayerRemove = L.geoJson(null, {
 		style: {
 			fillColor: 'red',
 			stroke: false
 		}
 	}).addTo(map);
-	
-	//create empty layer for TURF intersect
-	turfLayerIntersect = L.geoJson(null, {
-		style: {
-			fillColor: 'orange',
-			stroke: false
-		}
-	}).addTo(map);
-
 	//retrieve Brooklyn neighborhoods geoJSon layer, add it to the map
 	$.getJSON('http://catalog.opendata.city/dataset/7d28bbee-3e0b-45a3-8e8e-cbc8aebe6e5e/resource/77dc2ff5-0622-4076-95f9-54d8e77c3317/download/brooklynneighborhoodspolygon.geojson', function(data) {
 		var neighborhoods = L.geoJson(data, {
 			onEachFeature: function(feature, layer) {
 				layer.on('click', function() {
-					//clear the turf buffer layer
-					turfLayerBuffer.clearLayers();
-					//clear the turf centroid layer
-					turfLayerCenter.clearLayers();
-					//find neighborhood center
-					neighborhoodCenter = turf.center(feature);
-					turfLayerCenter.addData(neighborhoodCenter);
-					
+                    //clear the turf remove layer
+                    turfLayerRemove.clearLayers();
 					//store neighborhood name
-					neighborhoodName = layer.feature.properties.neighborhood;
+					neighborhoodName = feature.properties.neighborhood;
 					//calculate the area of the neighborhood, convert it to square miles, round to one decimal point, add " square miles" string
 					neighborhoodArea = (turf.area(feature) * 0.000000386102159).toFixed(1) + " square miles";
 					//calculate buffer around neighborhood, this returns a feature collection
-					featureBuffer = turf.buffer(feature, 100, 'feet');
-					console.log(featureBuffer);
-					//uncomment after fixing other issues
-					//add buffer layer to map
-					turfLayerBuffer.addData(featureBuffer);
-					
-					//experimenting with this code...
-					//erase the clicked feature from the buffer
-					//featureErase = turf.erase(featureBuffer.features[0], feature);
-					//find intersection of hollowed-out buffer area and overall geoJson
-					//selectedNeighborhoods = turf.intersect(data, featureErase)
-					
-					//turfLayerIntersect.addData(selectedNeighborhoods);
-					
-					//uncomment after fixing other issues
-					layer.bindPopup(neighborhoodName + " is <b>" + neighborhoodArea + "</b> in size.<br>The marker shows the geographic neighborhood center").openPopup();
-					
+					featureBuffer = turf.buffer(feature, 200, 'feet');
+                    //explode points of polygon
+                    featureExplode = turf.explode(featureBuffer);
+                    //count exploded points in Brooklyn neighborhoods
+                    featureCount = turf.count(data, featureExplode, 'pt_count');
+                    //remove the featureCount--feature must have 'pt_count' other than 0
+                    featureRemove = turf.remove(featureCount, 'pt_count', 0);
+                    //add featureRemove to the map
+                    turfLayerRemove.addData(featureRemove);
+                    //add a popup with the neighborhood name
+					layer.bindPopup(neighborhoodName + " is <b>" + neighborhoodArea + "</b> in size.<br>Its surrounding Brooklyn neighborhoods are highlighted.").openPopup();
 				})
 			}
 		});
-		
 		neighborhoods.addTo(map);
+        //clear highlights when you click elsewhere
+        map.on('click', function() {
+          turfLayerRemove.clearLayers();
+        });
 	});
-	
 });
-
 </script>
-
 </body>
-
 </html>
