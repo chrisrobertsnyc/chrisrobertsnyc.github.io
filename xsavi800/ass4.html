@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,9 +13,9 @@ html, body {
 	width: 100%;
 }
 </style>
-<!--Load Leaflet-->
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
-<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<!--Load Mapbox stuff-->
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.css' rel='stylesheet' />
 <!--Load TURF-->
 <script src="http://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js"></script>
 <!--Load JQuery-->
@@ -30,6 +31,9 @@ html, body {
     //find count of exloded points in all polygons (Aggregation: count)
     //find all polygons that have at least one exploded point (Data: remove)
     //add these polygons to the map as neighboring neighborhoods
+//Mapbox token
+L.mapbox.accessToken = 'pk.eyJ1IjoibWNnaWxsaW9uYWlyZSIsImEiOiJfU215T0NnIn0.rpUQ-jd36AmRPXXpHwRPWw';
+
 $(document).ready(function(){
 	//initialize map
 	var map = L.map('map', {
@@ -37,10 +41,7 @@ $(document).ready(function(){
 		zoom: 11
 	});
 	//initialize and add basemap
-	L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
-    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
-    maxZoom: 18
-	}).addTo(map);
+	L.mapbox.tileLayer('mcgillionaire.140920ed').addTo(map);
 	//create empty layer for TURF remove
 	turfLayerRemove = L.geoJson(null, {
 		style: {
@@ -50,8 +51,8 @@ $(document).ready(function(){
 	}).addTo(map);
 	//retrieve Brooklyn neighborhoods geoJSon layer, add it to the map
 	$.getJSON('http://catalog.opendata.city/dataset/7d28bbee-3e0b-45a3-8e8e-cbc8aebe6e5e/resource/77dc2ff5-0622-4076-95f9-54d8e77c3317/download/brooklynneighborhoodspolygon.geojson', function(data) {
-		var neighborhoods = L.geoJson(data, {
-			onEachFeature: function(feature, layer) {
+		var neighborhoods = L.geoJson(data,                     
+          {onEachFeature: function(feature, layer) {
 				layer.on('click', function() {
                     //clear the turf remove layer
                     turfLayerRemove.clearLayers();
