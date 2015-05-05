@@ -1,0 +1,217 @@
+<html>
+
+<head>
+  <meta charset=utf-8 />
+  <title>Tri State Trail Blueprint</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <!--Favicon stuff below-->
+
+  <!-- Load Bootstrap from CDN -->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <!-- Load Bootstrap Table from CDN -->
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.2.4/bootstrap-table.min.css">
+  <!-- Load JQuery -->
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <!-- Load Leaflet from CDN-->
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+  <!-- Load Leaflet Sidebar plugin -->
+  <link rel="stylesheet" href="http://turbo87.github.io/leaflet-sidebar/src/L.Control.Sidebar.css" />
+  <script src="http://turbo87.github.io/leaflet-sidebar/src/L.Control.Sidebar.js"></script>
+  <!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.ie.css" /><![endif]-->
+  
+<!--move style stuff to an external sheet?-->
+  <style type="text/css">
+    body {
+		margin:0;
+		padding:0;
+	}
+    #map {
+		position: absolute;
+		top:0;
+		bottom:0;
+		right:0;
+		left:0;
+	}
+	#info-pane {
+		border-color: transparent;
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		z-index: 10;
+		padding: 1em;
+		background-color: transparent;
+		max-width: 150px;
+		box-shadow: 0px 0px 0px #000000;
+	}
+	#logo {
+		color: green;
+		display: inline;
+		vertical-align: bottom;
+	}
+	#here {
+		color: green;
+	}
+	.fixed-table-container {
+		border: 2px solid green;
+		position: absolute;
+		bottom: 20px;
+		right: 10px;
+		z-index: 100;
+		padding: 1em;
+		background: white;
+		box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+    }
+	.fixed-table-body {
+		max-height: 600px;
+		max-width: 400px;
+    }
+	#sidebar {
+		border: 2px solid green;		
+	}
+    #hidden {
+		display:none;
+    }
+	.leaflet-popup-content-wrapper {
+		border: 2px solid green;
+		border-radius: 4px;
+	}
+	.leaflet-popup-tip-container {
+		overflow: visible; /*add to official map*/
+	}
+	.leaflet-popup-tip {
+		border-bottom: 2px solid green;
+		border-right: 2px solid green;
+		width: 19.1px; /*add to official map*/
+		height: 19.1px; /*add to official map*/
+		box-shadow: 0 3px 14px -14px rgba(0,0,0,0.4); /*add to official map*/
+		
+	}
+	.project {
+		background-color: green;
+		padding: 3px 5px 3px 5px;
+		color: white;
+		font-weight: bold;
+	}
+	.leaflet-container a {
+		color: green;
+	}
+  </style>
+</head>
+
+<body>
+	<div id="sidebar">
+		<h3 style="color: green"><b>Tri State Trail Blueprint</b></h3>
+		<hr>
+		<p>The New York metropolitan area is full of, like, the loveliest trails. If you're curious about the many adventures to be had in the RPA catchment, please go ahead and explore this map!</p>
+		<h4><b>How to use this map</b></h4>
+		<p>Click on a trail to see its name and how many miles long it is.</p>
+		<p>Click <b><a id="here" href="#">here</a></b> to advance to the map.</p>
+		<p>Click the <span id="here" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> icon at the top right to come back to this panel.</p>
+		<hr>
+		<p>
+			<a href="https://twitter.com/share" class="twitter-share-button" data-related="regionalplan">Tweet</a>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+		</p>
+		<p>This map was developed by students from Hunter College's <a href="http://www.hunteruap.org/"><b>Urban Planning program</b></a>.</p>
+	</div>
+	<div id="map"></div>
+	<div id="info-pane" class="leaflet-bar">
+		<h1><span id="logo" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></h1>
+	</div>
+<script>
+  //set map, add basemap. remove declaration of ostfIcon?
+
+  var map = L.map('map').setView([40.8970375,-73.652261], 8);
+  //console.log(L, L.esri);
+
+  L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(map);
+
+  //set control for sidebar
+  var sidebar = L.control.sidebar('sidebar', {
+    position: 'left'
+	});
+  map.addControl(sidebar);
+  
+  // Show sidebar
+  sidebar.show();
+
+  // Hide sidebar
+  sidebar.hide();
+
+  // Toggle sidebar visibility
+  sidebar.toggle();
+
+  // Check sidebar visibility
+  var visible = sidebar.isVisible();
+  
+  // to make the sidebar visible on start up...
+  setTimeout(function () {
+    sidebar.show();
+  }, 500);
+  
+  //toggle sidebar content on OSTF logo
+  $('#logo').click(function() {
+	sidebar.toggle();
+  });
+
+  //remove sidebar content on hyperlink click
+  $('#here').click(function() {
+	sidebar.toggle();
+  });
+  
+  
+  //pasted in code from highlight map Leaflet tutorial
+  function style() {
+	return {
+		weight: 5,
+		color: 'green',
+		opacity: 1,
+	};
+  }
+
+  function highlightFeature(e) {
+	var layer = e.target;
+	layer.setStyle({
+		weight: 10,
+		color: '#33CC33',
+		opacity: 1
+	});
+
+	if (!L.Browser.ie && !L.Browser.opera) {
+		layer.bringToFront();
+	}
+  }
+
+  var geojson;
+  
+  function resetHighlight(e) {
+	geojson.resetStyle(e.target);
+  }
+
+  function onEachFeature(feature, layer) {
+  	layer.bindPopup("<b>Name: </b>" + feature.properties.TRAILNAME + "<br><b>Length: </b>" + feature.properties.MILESLEN.toFixed(1) + " miles");
+	layer.on({
+		mouseover: highlightFeature,
+		mouseout: resetHighlight
+		});
+  }
+  
+  $.getJSON("trails.geojson", function(data) {
+    geojson = L.geoJson(data, {
+    	style: style
+    		//{
+        	//color: 'green',
+        	//opacity: 1
+        //}
+		, 
+    	onEachFeature: onEachFeature
+    			//function (feature, layer) {
+        	//layer.bindPopup("<b>Name: </b>" + feature.properties.TRAILNAME + "<br><b>Length: </b>" + feature.properties.MILESLEN.toFixed(1) + " miles");
+      }
+    );
+    geojson.addTo(map);
+  });
+</script>
+</body>
+</html>
