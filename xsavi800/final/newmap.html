@@ -1,0 +1,260 @@
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title>Hudson County Open Space</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <!--Favicon stuff-->
+  <link type="image/ico" rel="shortcut icon" href="http://gis.hcnj.us/images/hcsealwithnobackgroundicon.ico">
+  <link type="image/ico" rel="icon"  href="http://gis.hcnj.us/images/hcsealwithnobackgroundicon.ico">
+  <!-- Load Bootstrap from CDN -->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <!-- Load Bootstrap Table from CDN -->
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.2.4/bootstrap-table.min.css">
+  <!-- Load JQuery -->
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <!-- cool bootstrap plugin for working with tables
+    //http://wenzhixin.net.cn/p/bootstrap-table/docs/index.html
+  -->
+  <script src="http://rawgit.com/wenzhixin/bootstrap-table/master/dist/bootstrap-table.min.js"></script>
+  <!-- Load Leaflet from CDN-->
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+  <!-- Load Esri Leaflet from CDN -->
+  <script src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet/1.0.0-rc.6/esri-leaflet.js"></script>
+  <!--Load Esri Leaflet Related from CDB -->
+  <script src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-related/0.0.1-beta.2/esri-leaflet-related.js"></script>
+  <!-- Load Leaflet Sidebar plugin -->
+  <link rel="stylesheet" href="http://turbo87.github.io/leaflet-sidebar/src/L.Control.Sidebar.css" />
+  <script src="http://turbo87.github.io/leaflet-sidebar/src/L.Control.Sidebar.js"></script>
+  <!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.ie.css" /><![endif]-->
+  
+<!--move style stuff to an external sheet?-->
+  <style type="text/css">
+    body {
+		margin:0;
+		padding:0;
+	}
+    #map {
+		position: absolute;
+		top:0;
+		bottom:0;
+		right:0;
+		left:0;
+	}
+	#info-pane {
+		border-color: transparent;
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		z-index: 10;
+		padding: 1em;
+		background-color: transparent;
+		max-width: 150px;
+		box-shadow: 0px 0px 0px #000000;
+	}
+	#logo {
+		display: inline;
+		vertical-align: bottom;
+	}
+	.cssIcon {
+		color: green;
+		font-weight: bold;
+		font-size: 15px;
+		font-family: Arial, sans-serif;
+	}
+	.cssIcon::before {
+		content: "os";
+	}
+	.cssIconHighlight {
+		color: '#33CC33';
+		font-weight: bold;
+		font-size: 18px;
+		font-family: Arial, sans-serif;
+	}
+	.cssIconHighlight::before {
+		content: "os";
+	}
+	.fixed-table-container {
+		border: 2px solid green;
+		position: absolute;
+		bottom: 20px;
+		right: 10px;
+		z-index: 10;
+		padding: 1em;
+		background: white;
+		box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+    }
+	.fixed-table-body {
+		max-height: 600px;
+		max-width: 400px;
+    }
+	#sidebar {
+		border: 2px solid green;		
+	}
+    #hidden {
+		display:none;
+    }
+	.leaflet-popup-content-wrapper {
+		border: 2px solid green;
+		border-radius: 4px;
+	}
+	.leaflet-popup-tip-container {
+		overflow: visible;
+	}
+	.leaflet-popup-tip {
+		border-bottom: 2px solid green;
+		border-right: 2px solid green;
+		width: 19.1px;
+		height: 19.1px;
+		box-shadow: 0 3px 14px -14px rgba(0,0,0,0.4);
+	}
+	.project {
+		background-color: green;
+		padding: 3px 5px 3px 5px;
+		color: white;
+		font-weight: bold;
+	}
+	.leaflet-container a {
+		color: green;
+	}
+	.social {
+		display: block;
+	}
+	.esri-leaflet-logo, leaflet-control {
+		display: none;
+	}
+	.leaflet-control-attribution, leaflet-control {
+		display: none;
+	}
+  </style>
+</head>
+
+<body>
+	<div id='my-table' class="hidden hidden-xs leaflet-bar table-condensed"><p style="color: green"><b>Applications supporting this site</b></p></div>
+	<div id="sidebar">
+		<a href="http://www.hudsoncountynj.org/"><img src="http://gis.hcnj.us/images/HC_AGOL_Logo_WhiteFill.png" height=100px width=100px></a>
+		<h3 style="color: green"><b>Hudson County Open Space Map</b></h3>
+		<hr>
+		<p>Since 2005, the <b>Open Space Trust Fund</b> has provided a total of $44 million in funding to 116 projects, such as the North Bergen/Guttenberg Waterfront Park, Ellis Island restoration, and Veteran's Field in Kearny.</p>
+		<p> The map on this page indicates the open space projects that have been funded since the trust was created by the Board of Chosen Freeholders in 2003.</p>
+		<h4><b>How to use this map</b></h4>
+		<p>Clicking on an <span style="color: green; font-weight: bold; font-family: Arial, sans-serif; font-size: 15px">os</span> icon will bring up a popup window summarizing OSTF work at the site. If you're using a desktop computer, a table will appear that shows all past applications that have funded Open Space efforts related to the site.</p>
+		<p>Click <b><a id="here" href="#">here</a></b> to advance to the map.</p>
+		<p>Click the Open Space Trust Fund logo at any time to come back to this panel.</p>
+		<hr>
+		<p class="social">
+			<a href="https://twitter.com/share" class="twitter-share-button" data-related="HudCoTweet">Tweet</a>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+			<h4><a href="http://bit.ly/1buUhvx"><span class="glyphicon glyphicon-share" style="display: inline"></span></a></h4>
+		</p>
+		<p>This map was developed by Hudson County's <a href="http://www.hudsoncountynj.org/about-the-division-of-planning/"><b>Division of Planning</b></a>.</p>
+	</div>
+	<div id="map"></div>
+	<div id="info-pane" class="leaflet-bar">
+		<img id="logo" src="http://gis.hcnj.us/images/HC_AGOL_Logo_WhiteFill.png" height=100px width=100px>
+	</div>
+<script>
+  //set map, add basemap.
+
+  var cssIcon = L.divIcon({
+	className: 'cssIcon',
+  });
+
+  //coding for the icon
+  var cssIconHighlight = L.divIcon({
+	className: 'cssIconHighlight',
+  });
+  
+  var map = L.map('map').setView([40.7624186,-74.0468987], 12);
+  L.esri.basemapLayer('Topographic').addTo(map);
+
+  //set control for sidebar
+  var sidebar = L.control.sidebar('sidebar', {
+    position: 'left'
+	});
+  map.addControl(sidebar);
+  
+  // Show sidebar
+  sidebar.show();
+
+  // Hide sidebar
+  sidebar.hide();
+
+  // Toggle sidebar visibility
+  sidebar.toggle();
+
+  // Check sidebar visibility
+  var visible = sidebar.isVisible();
+  
+  // to make the sidebar visible on start up...
+  setTimeout(function () {
+    sidebar.show();
+  }, 500);
+  
+  //toggle sidebar content on logo
+  $('#logo').click(function() {
+	sidebar.toggle();
+  });
+
+  //remove sidebar content on hyperlink click
+  $('#here').click(function() {
+	sidebar.toggle();
+  });
+  
+  var ostfMultiPoints = L.esri.featureLayer('https://gis.hcnj.us/arcgis/rest/services/TestOSTF/TEST2/FeatureServer/0', {
+	pointToLayer: function(feature, latlng) {
+        return L.marker(latlng, {icon: cssIcon})
+	},
+	//what to do when each feature is created
+	onEachFeature: function (feature, layer) {
+		layer.bindPopup("<div class='project'>" + feature.properties.TITLE + "</div>" + "<br><b>Summary</b>: This project does quite a lot of nice stuff.  Like, really nice!");
+	}	
+  });
+  
+  ostfMultiPoints.addTo(map);
+  
+  //wire up click listener for ostfMultiPoints to query related table
+  ostfMultiPoints.on("click", queryRelated);
+  
+  //code for queryRelated
+function queryRelated(evt) {
+    L.esri.Tasks.queryRelated(ostfMultiPoints).objectIds([evt.layer.feature.id]).relationshipId("0").run(function(error, response, raw) {
+      //pull the attributes out of the geoJson response
+      if (response.features.length > 0) {
+        var results = [];
+        for (i=0; i < response.features.length; i++){
+          results.push(response.features[i].properties);
+        }
+        $('#my-table').removeClass('hidden');
+        //you can only call refresh() when loading from a url
+        $('#my-table').bootstrapTable('destroy');
+        $('#my-table').bootstrapTable({
+          data: results,
+          cache: false,
+          striped: true,
+          clickToSelect: true,
+          columns: [{
+              field: 'APP',
+              title: 'Application',
+              sortable: true,
+          }, {
+              field: 'PROJECT',
+              title: 'Project site',
+              sortable: true
+          }, {
+              field: 'SUMMARY',
+              title: 'Summary of application',
+              sortable: true
+          }]
+        });
+      }
+    });
+  }
+
+  map.on("click", function(){
+    //hide the table when the map is clicked
+    $('#my-table').bootstrapTable('destroy');
+  });
+</script>
+</body>
+</html>
