@@ -126,6 +126,9 @@
 	.leaflet-control-attribution, leaflet-control {
 		display: none;
 	}
+	#methodology {
+		display: none;
+	}
   </style>
 </head>
 
@@ -206,8 +209,8 @@
   });
   
   //toggle methodology section
-  $('#methodology-click').click(function() {
-  	$("#methodology").toggle();
+  $("#methodology-click").click(function() {
+        $("#methodology").toggle();
   });
   
   var ostfMultiPoints = L.esri.featureLayer('https://gis.hcnj.us/arcgis/rest/services/TestOSTF/TEST2/FeatureServer/0', {
