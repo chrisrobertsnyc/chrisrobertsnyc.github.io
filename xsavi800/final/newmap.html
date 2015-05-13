@@ -148,6 +148,10 @@
 			<h4><a href="http://bit.ly/1buUhvx"><span class="glyphicon glyphicon-share" style="display: inline"></span></a></h4>
 		</p>
 		<p>This map was developed by Hudson County's <a href="http://www.hudsoncountynj.org/about-the-division-of-planning/"><b>Division of Planning</b></a>.</p>
+		<p id="methodology-click"><b>Methodology +</b></p>
+		<div id="methodology">
+			<p><b>Data:</b> Spatial features come from the GIS database I produced for Hudson County's Division of Planning. Because the data has not been published yet, I'm using a made-up spatial layer and related table.</p>
+		</div>
 	</div>
 	<div id="map"></div>
 	<div id="info-pane" class="leaflet-bar">
@@ -199,6 +203,14 @@
   //remove sidebar content on hyperlink click
   $('#here').click(function() {
 	sidebar.toggle();
+  });
+  
+  //toggle methodology section
+  $('#methodology-click').click(function() {
+  	$("#methodology").hide();
+  });
+  $('#methodology-click').click(function() {
+  	$("#methodology").show();
   });
   
   var ostfMultiPoints = L.esri.featureLayer('https://gis.hcnj.us/arcgis/rest/services/TestOSTF/TEST2/FeatureServer/0', {
