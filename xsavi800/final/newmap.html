@@ -207,10 +207,7 @@
   
   //toggle methodology section
   $('#methodology-click').click(function() {
-  	$("#methodology").hide();
-  });
-  $('#methodology-click').click(function() {
-  	$("#methodology").show();
+  	$("#methodology").toggle();
   });
   
   var ostfMultiPoints = L.esri.featureLayer('https://gis.hcnj.us/arcgis/rest/services/TestOSTF/TEST2/FeatureServer/0', {
