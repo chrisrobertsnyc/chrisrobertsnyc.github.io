@@ -23,3 +23,7 @@ header, h1, h2, h3 {
 .row {
 	font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif;
 }
+
+a {
+	font-weight: bold;
+}
