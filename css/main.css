@@ -16,7 +16,7 @@ body {
 }
 
 /*trying to style fonts*/
-header, h1 {
+header, h1, h2, h3 {
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
 }
 
