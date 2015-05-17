@@ -14,3 +14,12 @@ body {
   transition: transform .3s;
   transition-property: box-shadow;
 }
+
+/*trying to style fonts*/
+header, h1 {
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
+}
+
+.row {
+	font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif;
+}
