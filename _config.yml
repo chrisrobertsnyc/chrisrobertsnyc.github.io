@@ -1,3 +1,10 @@
 name: Chris Roberts
 markdown: kramdown
 permalink: /blog/:year/:month/:day/:title
+prose:
+	siteurl: 'http://www.chrisroberts.nyc'
+    media: 'assets'
+    ignore:
+    	- index.md
+        - _config.yml
+        - /_layouts
