@@ -1,22 +1,33 @@
 ---
 layout: default
 title: home
+published: true
 ---
-***About me***
-I'm a GIS specialist and assistant planner for the <a href="http://www.hudsoncountynj.org/about-the-division-of-planning/">Division of Planning</a> of Hudson County, New Jersey. I'm also finishing up a Master's degree in urban planning at <a href="http://hunteruap.org/">Hunter College</a>.
 
-***About this site***
-This site is intended as a continual work in progress. I'm trying to do a couple different things here:
-- Develop web-mapping skills
-- Develop data visualization skills in general
+### About me
+I'm a GIS specialist and assistant planner for the [Division of Planning](http://www.hudsoncountynj.org/about-the-division-of-planning/) of Hudson County, New Jersey. I'm also finishing up a Master's degree in urban planning at [Hunter College] (http://hunteruap.org/).
+
+### About this site
+This site isn't intended to be a super-polished piece of work. Rather, I'm using it to work on a few things:
+- Develop web development, mapping, and data visualization skills
 - Host an online portfolio for work I've done
+- Share some thoughts on my Posts page
 
-<h3 id="contact">Contact me</h3>
-	<p><strong>Email:</strong> christopher [dot] roberts964 [at] myhunter [dot] cuny [dot] edu</p>
-	<p><strong>Twitter:</strong> <a href="http://www.twitter.com/roberts_chris">@roberts_chris</a></p>
-	<p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/chrisrobertsnyc">chrisrobertsnyc</a></p>
-	<p><strong>GitHub:</strong> <a href="http://www.github.com/chrisrobertsnyc">chrisrobertsnyc</a></p>
-	<hr>
-	<strong>Coding of this site</strong>
-	<p>This site is hosted through <a href="https://pages.github.com/">GitHub Pages</a> and compiled through GitHub's <a href="http://jekyllrb.com/">Jekyll</a> services, styled by a custom <a href="http://www.getbootstrap.com/">Bootstrap</a> theme, with a dash of <a href="https://jquery.com/">jQuery</a> for interactivity.</p>
-	<p>Any coding inspirations are cited in code comments.</p>
+So, if this site isn't entirely functional at times, that's to be expected--I'm ju
+
+### Contact me
+**Email**: christopher [dot] roberts964 [at] myhunter [dot] cuny [dot] edu
+
+**Twitter**: [@roberts_chris](http://www.twitter.com/roberts_chris)
+
+**LinkedIn**: [chrisrobertsnyc](https://www.linkedin.com/in/chrisrobertsnyc)
+
+**GitHub**: [chrisrobertsnyc](http://www.github.com/chrisrobertsnyc)
+
+---
+
+**Coding of this site**
+
+This site is hosted through [GitHub Pages](https://pages.github.com) and compiled through GitHub's [Jekyll](http://jekyllrb.com/) service, styled by a custom [Bootstrap](http://www.getbootstrap.com/) theme, with a dash of [jQuery](https://jquery.com/) for interactivity.
+
+Any coding inspirations are cited in code comments.
