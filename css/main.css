@@ -16,6 +16,9 @@ body {
   transition: transform .3s;
   transition-property: box-shadow;
 }
+#blog-jumbotron {
+	background-image: url('/assets/map-bg.png');
+}
 
 header, h1, h2, h3 {
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
