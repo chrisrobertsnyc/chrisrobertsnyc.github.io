@@ -18,7 +18,6 @@ body {
 }
 #blog-jumbotron {
 	background-image: url('/assets/map-bg.png');
-  padding-top: -70px;
 }
 ::-moz-selection { /* Code for Firefox */
     background: #F0AD4E;
