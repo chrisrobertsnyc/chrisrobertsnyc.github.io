@@ -990,7 +990,7 @@ select[multiple].input-group-sm>.form-control,select[multiple].input-group-sm>.i
 .navbar-default .btn-link{color:#777}
 .navbar-default .btn-link:focus,.navbar-default .btn-link:hover{color:#333}
 .navbar-default .btn-link[disabled]:focus,.navbar-default .btn-link[disabled]:hover,fieldset[disabled] .navbar-default .btn-link:focus,fieldset[disabled] .navbar-default .btn-link:hover{color:#ccc}
-.navbar-inverse{background-color:#000;border-color:#fff}
+.navbar-inverse{background-color:#1f424d;border-color:#1f424d}
 .navbar-inverse .navbar-brand{color:#fff}
 .navbar-inverse .navbar-brand:focus,.navbar-inverse .navbar-brand:hover{color:#000;background-color:#fff}
 .navbar-inverse .navbar-nav>li>a,.navbar-inverse .navbar-text{color:#fff}
