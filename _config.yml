@@ -5,6 +5,5 @@ prose:
     media: 'assets'
     siteurl: 'http://www.chrisroberts.nyc'
     ignore:
-    	- index.md
         - _config.yml
         - /_layouts
