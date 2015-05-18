@@ -13,3 +13,4 @@
 - develop layouts for other pages
   - viz-enabled special feature page
   - full-screen map with navbar on top
+- set up prose.io for blog posts
