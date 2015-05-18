@@ -19,7 +19,13 @@ body {
 #blog-jumbotron {
 	background-image: url('/assets/map-bg.png');
 }
+::-moz-selection { /* Code for Firefox */
+    background: #F0AD4E;
+}
 
+::selection {
+    background: #F0AD4E;
+}
 header, h1, h2, h3 {
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
 }
