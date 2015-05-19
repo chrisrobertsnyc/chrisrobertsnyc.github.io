@@ -1,10 +1,8 @@
 ---
+layout: post
 published: true
+title: Another post
 ---
-
-
-
-## Another post
 
 What am I doing? Am I doing this correctly?
 
