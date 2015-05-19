@@ -7,3 +7,6 @@ prose:
     ignore:
         - _config.yml
         - /_layouts
+        - /css
+        - /trails
+        - /xsavi800
