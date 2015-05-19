@@ -1,7 +1,8 @@
 ---
 layout: post
-published: false
+published: true
 title: A third dumb post
 ---
+
 
 Does this work?
