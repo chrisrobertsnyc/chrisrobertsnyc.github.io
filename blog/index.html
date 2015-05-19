@@ -8,9 +8,15 @@ title: Posts
   		</div>
 	</div>
 	<!--<h2>{{ page.title }}</h2>-->
-	<ul>
-
+	<div class="container">
 	  {% for post in site.posts %}
-	    <li><span>{{ post.date | date_to_string }}</span> » <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+	  	<div class="row">
+			<div class="col-md-4">
+				<a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+			</div>
+			<div class="col-md-4">
+				<span>{{ post.date | date_to_string }}</span>
+	  		</div>
+		</div>
 	  {% endfor %}
-	</ul>
+	</div>
