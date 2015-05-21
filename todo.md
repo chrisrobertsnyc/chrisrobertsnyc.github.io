@@ -17,3 +17,4 @@
   - full-screen map with navbar on top
 - set up prose.io for blog posts
 - decide on content for main page, code it
+- maybe add background texture for navbar, can use http://www.transparenttextures.com/ to preview
