@@ -15,4 +15,4 @@ When you click on an official neighborhood of Brooklyn, the area of the neighbor
 
 [_Viewing ESRI data in a Leaflet map_](http://chrisroberts.nyc/xsavi800/final/newmap.html)
 
-At work I deal with Esri's software and proprietary data formats. I like Leaflet's javascript API a lot more than ESRI's, so I research ways to work with ESRI data through open source APIs. The result is this map, which displays spatial data from an ArcServer feature service; when a point is clicked, the record is queried in a related table for more data.
+At work I deal with Esri's software and proprietary data formats. I like Leaflet's javascript API a lot more than ESRI's, so I researched ways to work with ESRI data through open source APIs. The result is this map, which displays spatial data from an ArcServer feature service; when a point is clicked, the record is queried in a related table for more data.
