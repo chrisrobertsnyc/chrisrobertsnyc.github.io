@@ -6,6 +6,7 @@ published: true
 Most of my mapping work is done for Hudson County, but I also try to code a few maps on the side.
 
 **XSAVI 800**
+
 I developed a few maps for the Advanced Web Mapping class I took at Pratt.
 
 [_Neighboring Neighborhood Map of Brooklyn_](http://chrisroberts.nyc/xsavi800/ass4.html)
