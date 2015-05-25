@@ -993,7 +993,7 @@ select[multiple].input-group-sm>.form-control,select[multiple].input-group-sm>.i
 .navbar-inverse{background-color:#fff;border-color:#1f424d; background-image: url(http://www.transparenttextures.com/patterns/bright-squares.png);}
 .navbar-inverse .navbar-brand{color:#fff}
 .navbar-inverse .navbar-brand:focus,.navbar-inverse .navbar-brand:hover{color:#000;background-color:#1f424d}
-.navbar-inverse .navbar-nav>li>a,.navbar-inverse .navbar-text{color:#fff}
+.navbar-inverse .navbar-nav>li>a,.navbar-inverse .navbar-text{color:#000}
 .navbar-inverse .navbar-nav>.active>a,.navbar-inverse .navbar-nav>.active>a:focus,.navbar-inverse .navbar-nav>.active>a:hover,.navbar-inverse .navbar-nav>li>a:focus,.navbar-inverse .navbar-nav>li>a:hover{color:#000;background-color:#5bc0de}
 .navbar-inverse .navbar-nav>.disabled>a,.navbar-inverse .navbar-nav>.disabled>a:focus,.navbar-inverse .navbar-nav>.disabled>a:hover{color:#444;background-color:rgba(0,0,0,0)}
 .navbar-inverse .navbar-toggle{border-color:#1f424d}
