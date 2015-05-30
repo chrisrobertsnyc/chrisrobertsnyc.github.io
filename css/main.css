@@ -18,6 +18,7 @@ body {
 }
 #blog-jumbotron {
 	background-image: url('/assets/bright-squares-skyline.png');
+  background-size: auto 100%;
 }
 ::-moz-selection { /* Code for Firefox */
     background: #F0AD4E;
