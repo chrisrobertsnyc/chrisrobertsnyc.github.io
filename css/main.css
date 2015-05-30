@@ -17,8 +17,7 @@ body {
   transition-property: box-shadow;
 }
 #blog-jumbotron {
-	background-image: url('/assets/bright-squares-skyline2.png');
-  background-position:left center;
+	background-image: url('/assets/map-bg.png');
 }
 ::-moz-selection { /* Code for Firefox */
     background: #F0AD4E;
