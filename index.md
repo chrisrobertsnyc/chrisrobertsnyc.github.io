@@ -8,12 +8,8 @@ published: true
 I'm a GIS specialist and assistant planner for the [Division of Planning](http://www.hudsoncountynj.org/about-the-division-of-planning/) of Hudson County, New Jersey. I'm also finishing up a Master's degree in urban planning at [Hunter College](http://hunteruap.org/).
 
 ### About this site
-This site isn't intended to be a super-polished piece of work. Rather, I'm using it to work on a few things:
-- Develop web development, mapping, and data visualization skills
-- Host an online portfolio for work I've done
-- Share some thoughts on my Posts page
-
-So, if this site isn't entirely functional at times, that's to be expected--I'm ju
+This site is for my own personal development, as well as a bit of fun. It's always going to be a work in progress, so some pages may look polished, but then you might click on a link and get a 404 error.
+I think maps are pretty darn cool, so this site will act partially as a repository for my mapping efforts. And when I have more free time after I'm done with grad school, I'd like to start blogging again.
 
 ### Contact me
 **Email**: christopher [dot] roberts964 [at] myhunter [dot] cuny [dot] edu
