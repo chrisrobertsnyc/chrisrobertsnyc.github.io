@@ -9,6 +9,8 @@ I'm a GIS specialist and assistant planner for the [Division of Planning](http:/
 
 ### About this site
 This site is for my own personal development, as well as a bit of fun. It's always going to be a work in progress, so some pages may look polished, but then you might click on a link and get a 404 error.
+
+
 I think maps are pretty darn cool, so this site will act partially as a repository for my mapping efforts. And when I have more free time after I'm done with grad school, I'd like to start blogging again.
 
 ### Contact me
