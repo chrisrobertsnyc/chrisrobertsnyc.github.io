@@ -19,7 +19,7 @@ body {
 #blog-jumbotron {
 	background-image: url('/assets/flower_lol.jpg');
   background-repeat: repeat-y;
-  background-size: contain;
+  background-size: cover;
 }
 ::-moz-selection { /* Code for Firefox */
     background: #F0AD4E;
