@@ -17,7 +17,7 @@ body {
   transition-property: box-shadow;
 }
 #blog-jumbotron {
-	background-image: url('/assets/bright-squares-skyline2.png');
+	background-image: url('/assets/flower_lol.jpg');
   background-repeat: repeat-x;
   background-size: contain;
 }
