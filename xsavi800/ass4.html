@@ -50,7 +50,7 @@ $(document).ready(function(){
 		}
 	}).addTo(map);
 	//retrieve Brooklyn neighborhoods geoJSon layer, add it to the map
-	$.getJSON('http://catalog.opendata.city/dataset/7d28bbee-3e0b-45a3-8e8e-cbc8aebe6e5e/resource/77dc2ff5-0622-4076-95f9-54d8e77c3317/download/brooklynneighborhoodspolygon.geojson', function(data) {
+	$.getJSON('http://catalog.civicdashboards.com/dataset/bcdd8479-5881-40bd-90fd-7320aa1673d7/resource/7a0a136e-b7bb-44f5-8044-f21591ef49aa/download/77dc2ff50622407695f954d8e77c3317brooklynneighborhoodspolygon.geojson', function(data) {
 		var neighborhoods = L.geoJson(data,                     
           {onEachFeature: function(feature, layer) {
 				layer.on('click', function() {
