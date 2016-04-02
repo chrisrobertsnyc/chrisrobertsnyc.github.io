@@ -1,0 +1,393 @@
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title>Hudson County Planning Board</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <!--Favicon stuff-->
+  <link type="image/ico" rel="shortcut icon" href="http://gis.hcnj.us/images/hcsealwithnobackgroundicon.ico">
+  <link type="image/ico" rel="icon"  href="http://gis.hcnj.us/images/hcsealwithnobackgroundicon.ico">
+  <!-- Load JQuery -->
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <!-- Load Bootstrap CSS from CDN -->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <!-- Load Bootstrap JS from CDN -->
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <!-- Load Leaflet from CDN-->
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+  <!-- Load Esri Leaflet from CDN -->
+  <script src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet/1.0.0-rc.6/esri-leaflet.js"></script>
+    <!-- Load Leaflet Sidebar plugin -->
+  <link rel="stylesheet" href="http://turbo87.github.io/leaflet-sidebar/src/L.Control.Sidebar.css" />
+  <script src="http://turbo87.github.io/leaflet-sidebar/src/L.Control.Sidebar.js"></script>
+  <!--Load Leaflet Control Search plugin -->
+  <link rel="stylesheet" href="http://labs.easyblog.it/maps/leaflet-search/src/leaflet-search.css" />
+
+  <!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.ie.css" /><![endif]-->
+  
+<!--move style stuff to an external sheet?-->
+  <style type="text/css">
+    body {
+		font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+		margin:0;
+		padding:0;
+	}
+    #map {
+		font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+		position: absolute;
+		top:0;
+		bottom:0;
+		right:0;
+		left:0;
+	}
+	#info-pane {
+		border-color: transparent;
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		z-index: 10;
+		padding: 1em;
+		background-color: transparent;
+		max-width: 150px;
+		box-shadow: 0px 0px 0px #000000;
+	}
+	#logo {
+		display: inline;
+		vertical-align: bottom;
+	}
+
+	#sidebar {
+		border: 2px solid green;		
+	}
+    #hidden {
+		display:none;
+    }
+	.leaflet-popup-content-wrapper {
+		border: 2px solid orange;
+		border-radius: 4px;
+	}
+	.leaflet-popup-tip-container {
+		overflow: visible;
+	}
+	.leaflet-popup-tip {
+		border-bottom: 2px solid orange;
+		border-right: 2px solid orange;
+		width: 19.1px;
+		height: 19.1px;
+		box-shadow: 0 3px 14px -14px rgba(0,0,0,0.4);
+	}
+	.leaflet-popup .leaflet-zoom-animated {
+		bottom: 0px;
+	}
+	.leaflet-container a {
+		color: green;
+	}
+	.social {
+		display: block;
+	}
+	leaflet-control {
+		display: none;
+	}
+	.leaflet-control-attribution, leaflet-control {
+		display: none;
+	}
+  </style>
+</head>
+
+<body>
+<!--Facebook JavaScript SDK stuff-->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<!--End Facebook JavaScript SDK stuff-->
+
+	<div id="sidebar">
+		<h3 style="color: green"><b>Hudson County Planning Board</b></h3>
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#pbmap">Map</a></li>
+			<li><a data-toggle="tab" href="#fees">Fees</a></li>
+			<li><a data-toggle="tab" href="#ldr">Regulations</a></li>
+		</ul>
+
+		<div class="tab-content">
+			<div id="pbmap" class="tab-pane fade in active">
+					<br>
+					<p>Users will be able to switch between different views of County roads, i.e. between standard orange color and color-coded for street typology.</p>
+					<p>Users will then either draw or select their lot, select a few details about their site (if it's a subdivision too, etc.), then press "OK" to begin analysis of their site for LDR compliance.</p>
+					<h4>Major/Minor Form & Analysis</h4>
+					<p>Based on your additional input, your development appears to be a Minor site plan.</p>
+					<h4>Along/Abut County Roads</h4>
+					<p>As your property is within 50 feet of ______ Road, it appears to be along or abutting a County Road. Thus, your development may need to be reviewed by the Planning Board.</p>
+					<h4>Flood Zone Analysis</h4>
+					<p>A portion of your property falls into _____ zone. Your development should consider flood mitigating techniques. You should also consider purchasing flood insurance.</p>
+					<h4>Jurisdictions</h4>
+					<p>As your property is located in ______, you may also have to file for development approval before their planning or zoning board. As your development also occurs within the jurisdiction of the New Jersey Sports & Entertainment Authority (NJSEA), you may have to file for approval from NJSEA as well.</p>
+					<h4>Local Zoning</h4>
+					<p>Your property falls into the following municipal zones:</p>
+						<ul>
+							<li>R1</li>
+							<li>R2</li>
+						</ul>
+					<p>Please refer to your local municipality for complete development regulations.</p>
+					<h4>Potential Drainage Impact</h4>
+					<p>A portion of your property includes a steep slope ( ?% rise over ? feet). Development on your property may have a significant drainage impact on surrounding property and public infrastructure.</p>
+					<h4>Suggested Green Techniques</h4>
+					<p>As your property appears to be along or abut ____ Road, classified as _____, the following Green Techniques are recommended for implementation on your property:</p>
+						<ul>
+							<li>Filter Strips</li>
+							<li>Porous Pavements</li>
+						</ul>
+					<h4>County Road Signage</h4>
+					<p>One or more County signs exist within 20 feet of your property. If your project involves significant revisions to the nearby streetscape, you will be expected to replace all or some of the following signs (also see map at right):</p>
+						<ul>
+							<li>No Parking</li>
+							<li>One Way</li>
+						</ul>
+					<h4>Shade Trees</h4>
+					<p>Please see Section 3 for more details.</p>
+					<h4>Proximity to Wetlands</h4>
+					<p>...</p>
+					<h4>Known Contaminated Sites</h4>
+					<p>...</p>
+					<br>
+					<a href="" id="print">Print this report.</a>
+					
+					<hr>
+					<p class="social">
+						<a href="https://twitter.com/share" class="twitter-share-button" data-related="HudCoTweet">Tweet</a>
+						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+					</p>
+					<p class="social">
+						<div class="fb-like" data-href="http://gis.hcnj.us/openspace/" data-width="200" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+					</p>
+					<p>This map was developed by Hudson County's <a href="http://www.hudsoncountynj.org/about-the-division-of-planning/"><b>Division of Planning</b></a>.</p>
+					<p>See Hudson County's <a href="http://gis.hcnj.us/"><b>Interactive Mapping Initiative</b></a> for more online maps about Hudson County.</p>
+			</div>
+			<div id="fees" class="tab-pane fade">
+					<br>
+					<div class="dropdown">
+						<button id="appselectedbutton" class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">Application Type
+							<span class="caret"></span>
+						</button>
+						<ul id="appselectmenu" class="dropdown-menu">
+							<li><a href="#">Site Plan</a></li>
+							<li><a href="#">Subdivision</a></li>
+							<li><a href="#">Site Plan and Subdivision</a></li>
+						</ul>
+					</div>
+					<br>
+					<div id="parkingspaces" class="input-group hidden">
+						<span class="input-group-addon" id="basic-addon1">Parking spaces</span>
+						<input type="text" class="form-control" placeholder="e.g. 10" aria-describedby="basic-addon1">
+					</div>
+					<br>
+					<div id="imperviouscoverage" class="input-group hidden">
+						<span class="input-group-addon" id="basic-addon1">Impervious coverage</span>
+						<input type="text" class="form-control" placeholder="e.g. 5000" aria-describedby="basic-addon1">
+					</div>
+					<br>
+					<div id="proposedparcels" class="input-group hidden">
+						<span class="input-group-addon" id="basic-addon1">Proposed parcels</span>
+						<input type="text" class="form-control" placeholder="e.g. 3" aria-describedby="basic-addon1">
+					</div>
+					<div id="orgstatus" class="checkbox hidden">
+						<label><input type="checkbox" value="Yes">Government, church, or 501c3 non-profit organization</label>
+					</div>
+					
+					<div id="leed" class="dropdown hidden">
+						<button id="leedbutton" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">LEED Certification
+							<span class="caret"></span>
+						</button>
+						<ul id="leeditems" class="dropdown-menu">
+							<li><a href="#">None</a></li>
+							<li><a href="#">Silver</a></li>
+							<li><a href="#">Gold</a></li>
+							<li><a href="#">Platinum</a></li>
+						</ul>
+					</div>
+					
+					<hr>
+					<h3><b>Fee Estimate:</b></h3>
+					<h4  id="appselected"><b></b></h4>
+					<p>Application Base fee: $100</p>
+					<p>Application Additional fee: $66.67</p>
+					<p>Total Application fee: <span style="color: green"><b>$166.67</b></span></p>
+					
+			</div>
+			<div id="ldr" class="tab-pane fade">
+					<br>
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search for...">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button">OK</button>
+						</span>
+					</div>
+					<br>
+					<b>
+						<p>Table of Contents</p>
+						<ol>
+							<li>Administration</li>
+							<li>Definitions</li>
+							<li>Applicability</li>
+							<li>Application Submission Procedures</li>
+							<li>...</li>
+						</ol>
+					</b>
+					<p><strong>Section 4</strong></p>
+					<p>Applicant shall plant one shade tree for every 30 feet of site frontage along a County road.</p>
+					<p>Etc.</p>
+			</div>
+		</div>
+
+	</div>
+	<div id="map"></div>
+	<div id="info-pane" class="leaflet-bar">
+		<img id="logo" src="http://gis.hcnj.us/images/HC_AGOL_Logo_WhiteFill.png" height=100px width=100px>
+	</div>
+<script src="http://labs.easyblog.it/maps/leaflet-search/src/leaflet-search.js"></script>
+<script>
+
+//print option
+$('#print').on('click', function() {
+	window.print();
+});
+
+//select app type
+$('#appselectmenu li > a').on('click', function(){
+    $('#appselected').text($(this).text());
+	$('#appselectedbutton').text($(this).text());
+	if (($(this).text()) == "Site Plan") {
+		$('#parkingspaces').removeClass('hidden');
+		$('#imperviouscoverage').removeClass('hidden');
+		$('#proposedparcels').addClass('hidden');
+		$('#orgstatus').removeClass('hidden');
+		$('#leed').removeClass('hidden');
+	}
+	else if (($(this).text()) == "Site Plan and Subdivision") {
+		$('#parkingspaces').removeClass('hidden');
+		$('#imperviouscoverage').removeClass('hidden');
+		$('#proposedparcels').removeClass('hidden');
+		$('#orgstatus').removeClass('hidden');
+		$('#leed').removeClass('hidden');
+	}
+	else {
+		$('#parkingspaces').addClass('hidden');
+		$('#imperviouscoverage').addClass('hidden');
+		$('#leed').addClass('hidden');
+		$('#proposedparcels').removeClass('hidden');
+		$('#orgstatus').removeClass('hidden');
+	}
+	;
+});
+
+//select LEED type
+$('#leed li > a').on('click', function(){
+	$('#leedbutton').text($(this).text());
+});
+
+
+  //set map, add basemap. 
+  var map = L.map('map').setView([40.7624186,-74.0468987], 12);
+  L.esri.basemapLayer('Topographic').addTo(map);
+
+  //set control for sidebar
+  var sidebar = L.control.sidebar('sidebar', {
+    position: 'left'
+	});
+  map.addControl(sidebar);
+  
+  // Show sidebar
+  //sidebar.show();
+
+  // Hide sidebar
+  //sidebar.hide();
+
+  // Toggle sidebar visibility
+  //sidebar.toggle();
+
+  // Check sidebar visibility
+  var visible = sidebar.isVisible();
+  
+  // to make the sidebar visible on start up...
+  setTimeout(function () {
+    sidebar.show();
+  }, 500);
+  
+  //toggle sidebar content on OSTF logo
+  $('#logo').click(function() {
+	sidebar.toggle();
+  });
+
+  //county road popup
+  function countyRoadPopUp(feature, layer) {
+    layer.bindPopup(feature.properties.Label);
+  }
+  
+  //county road style
+  function countyroadstyle(feature) {
+    return {
+        weight: 2,
+        opacity: 1,
+        color: 'orange',
+        fillOpacity: 0.7
+    };
+}
+
+//load county roads
+$(document).ready(function(){
+	$.getJSON('https://api.myjson.com/bins/2tifb', function(data) {
+		var countyroads = L.geoJson(data, {
+			style: countyroadstyle,
+			onEachFeature:countyRoadPopUp});
+		countyroads.addTo(map);
+	});
+});
+ 
+ //add OKControl button to map
+ var OKControl =  L.Control.extend({
+  options: {
+    position: 'topleft'
+  },
+  onAdd: function (map) {
+    var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+
+    container.style.backgroundColor = 'white';   
+	container.style.color = 'black';
+    container.style.content = "bob";
+    container.style.backgroundSize = "300px 30px";
+    container.style.width = '26px';
+    container.style.height = '26px';
+
+    container.onclick = function(){
+      console.log('OKbuttonClicked');
+    }
+
+    return container;
+  }
+});
+map.addControl(new OKControl());
+ 
+ 
+ //add Leaflet Control Search to map
+ 	map.addControl( new L.Control.Search({
+			url: 'http://nominatim.openstreetmap.org/search?format=json&q={s}',
+			jsonpParam: 'json_callback',
+			propertyName: 'display_name',
+			propertyLoc: ['lat','lon'],
+			circleLocation: false,
+			markerLocation: true,			
+			autoType: false,
+			autoCollapse: true,
+			minLength: 2,
+			zoom:15
+		}) );
+
+</script>
+</body>
+</html>

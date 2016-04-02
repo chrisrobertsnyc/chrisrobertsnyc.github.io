@@ -1,0 +1,6 @@
+<div data-ng-init="chapters=['Administration','Definitions','Applicability','Application Submission Procedures']"></div>
+<input type="text" class="form-control" placeholder="Search for..." data-ng-model="chapter">
+<p>Table of Contents</p>
+<ol>
+	<li data-ng-repeat="pbchapter in chapters | filter:chapter">{{  pbchapter  }}</li>
+</ol>

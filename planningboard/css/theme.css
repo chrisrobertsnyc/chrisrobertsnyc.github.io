@@ -1,0 +1,64 @@
+body {
+		font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+		margin:0;
+		padding:0;
+	}
+#map {
+	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+	position: absolute;
+	top:0;
+	bottom:0;
+	right:0;
+	left:0;
+}
+#info-pane {
+	border-color: transparent;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	z-index: 10;
+	padding: 1em;
+	background-color: transparent;
+	max-width: 150px;
+	box-shadow: 0px 0px 0px #000000;
+}
+#logo {
+	display: inline;
+	vertical-align: bottom;
+}
+
+#sidebar {
+	border: 2px solid green;		
+}
+#hidden {
+	display:none;
+}
+.leaflet-popup-content-wrapper {
+	border: 2px solid orange;
+	border-radius: 4px;
+}
+.leaflet-popup-tip-container {
+	overflow: visible;
+}
+.leaflet-popup-tip {
+	border-bottom: 2px solid orange;
+	border-right: 2px solid orange;
+	width: 19.1px;
+	height: 19.1px;
+	box-shadow: 0 3px 14px -14px rgba(0,0,0,0.4);
+}
+.leaflet-popup .leaflet-zoom-animated {
+	bottom: 0px;
+}
+.leaflet-container a {
+	color: green;
+}
+.social {
+	display: block;
+}
+leaflet-control {
+	display: none;
+}
+.leaflet-control-attribution, leaflet-control {
+	display: none;
+}
