@@ -62,3 +62,6 @@ leaflet-control {
 .leaflet-control-attribution, leaflet-control {
 	display: none;
 }
+
+/*instructed to add this by Angular Bootstrap UI docs */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer;}
