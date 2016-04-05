@@ -38,7 +38,8 @@ pbApp.controller('feesCtrl', function ($scope) {
 	  },
 	  "telecom": {
 		  "fee": 500
-	  }
+	  },
+	  "appselected": ""
   };
   
 });
