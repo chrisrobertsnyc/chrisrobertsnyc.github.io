@@ -2,6 +2,23 @@
 pbApp.controller('feesCtrl', function ($scope) {
 	
   $scope.feesData = {
+  	  "type": [
+  	  	{"value": "sp",
+  	  	"label": "Site Plan"
+  	    },
+  	    {"value": "sd",
+  	    "label": "Subdivision"
+  		},
+  		{"value": "spsd",
+  		"label": "Site Plan & Subdivision"
+  		},
+  		{"value": "telecom",
+  		"label": "Telecommunications"
+  		},
+  		{"value": "jd",
+  		"label": "Jurisdictional Determination"
+  		}
+  	  ],
 	  "sp": {
 		  "parkingspaces": 0,
 		  "coverage" : 0,
