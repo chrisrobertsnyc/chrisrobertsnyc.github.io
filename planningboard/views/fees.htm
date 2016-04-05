@@ -1,23 +1,25 @@
 <div class="container" data-ng-controller="feesCtrl">
 	<div class="row row-content">
 		<div class="col-xs-12 col-sm12">
+			<p>Applicants may enter information into the form below to preview their application fees.</p>
 			<form class="form-horizontal" name="feedsDataForm" novalidate>
-				<p>Applicants may enter information into the form below to preview their application fees.</p>
 				<div class="col-xs-12 col-sm-12 col-md-6">
 					<select class="form-control" ng-model="feesData.appselected" ng-options="item.value as item.label for item in feesData.type">
 						<option value="">Application Type</option>
 					</select>
 				</div>
 			</form>
-			<p>{{ feesData.sp.parkingspaces | currency }}</p>
-			<hr>
-			<ol><small>
-				<li>Federal, state, county, and municipal governments, churches, hospitals and 501©3 non-profit organizations are not required to submit an application fee, but may be asked to submit appropriate escrow deposits.</li>
-				<li>The application fee for US Green Building Council LEED (Leadership in Energy & Environmental Design) certified projects shall be reduced or eliminated as follows: Silver certified projects shall receive a 50% discount off the total application fee; Gold Certified projects shall receive a 75% discount off the total application fee; and Platinum certified projects pay no application fee.</li>
-				<li>$100 per parcel for the Application Fee; $100 per parcel for the Review Escrow Deposit, $50 per parcel for the Performance Guarantee & Inspection Escrow.</li>
-				<li>$10 per parking space or 300 square feet of impermeable coverage (whichever is greater) for the Application Fee; $20 per parking space or 300 square feet of impermeable coverage (whichever is greater) for the Review Escrow Deposit; $5 per parking space or 300 square feet of impermeable coverage (whichever is greater) for the Total Performance/Guarantee Escrow.</li>
-				<li>Certified Checks, Cashier's Checks, or Money Orders shall be made payable to the "County of Hudson." Cash or personal checks will not be accepted. Separate checks must be submitted for the application fee and escrow deposits.</li>
-			</small></ol>
 		</div>
+	</div>
+	<div class="row row-content">
+		<p>{{ feesData.sp.parkingspaces | currency }}</p>
+		<hr>
+		<ol><small>
+			<li>Federal, state, county, and municipal governments, churches, hospitals and 501©3 non-profit organizations are not required to submit an application fee, but may be asked to submit appropriate escrow deposits.</li>
+			<li>The application fee for US Green Building Council LEED (Leadership in Energy & Environmental Design) certified projects shall be reduced or eliminated as follows: Silver certified projects shall receive a 50% discount off the total application fee; Gold Certified projects shall receive a 75% discount off the total application fee; and Platinum certified projects pay no application fee.</li>
+			<li>$100 per parcel for the Application Fee; $100 per parcel for the Review Escrow Deposit, $50 per parcel for the Performance Guarantee & Inspection Escrow.</li>
+			<li>$10 per parking space or 300 square feet of impermeable coverage (whichever is greater) for the Application Fee; $20 per parking space or 300 square feet of impermeable coverage (whichever is greater) for the Review Escrow Deposit; $5 per parking space or 300 square feet of impermeable coverage (whichever is greater) for the Total Performance/Guarantee Escrow.</li>
+			<li>Certified Checks, Cashier's Checks, or Money Orders shall be made payable to the "County of Hudson." Cash or personal checks will not be accepted. Separate checks must be submitted for the application fee and escrow deposits.</li>
+		</small></ol>
 	</div>
 </div>
