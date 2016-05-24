@@ -1,0 +1,14 @@
+<h3 style="color: green"><b>Hudson County Planning Board</b></h3>
+<div ng-controller="routeController">
+    <tabset>
+        <tab 
+            ng-repeat="t in tabs" 
+            heading="{{t.heading}}"
+            select="go(t.route)"
+            active="t.active">
+        </tab>
+    </tabset>
+    <h2>View:</h2>
+    <div ui-view></div>
+
+</div>

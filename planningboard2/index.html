@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html data-ng-app="pbApp">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive guide to the Hudson County Planning Board">
+  <meta name="keywords" content="Hudson County, Planning Board, Hudson County Planning Board, HCPB, GIS, map">
+  <meta name="author" content="Chris Roberts, GIS Specialist, Hudson County">
+  <title>Hudson County Planning Board</title>
+  <!--Favicon stuff-->
+  <link type="image/ico" rel="shortcut icon" href="http://gis.hcnj.us/images/hcsealwithnobackgroundicon.ico">
+  <link type="image/ico" rel="icon"  href="http://gis.hcnj.us/images/hcsealwithnobackgroundicon.ico">
+  <!--Bootstrap CSS-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <!--AngularJS-->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+  <!--Angular Bootstrap UI-->
+  <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.min.js"></script>
+  <!--Angular UI Router-->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.js"></script>
+
+
+  <!--Leaflet CSS-->
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+  <!--Leaflet Sidebar plugin CSS-->
+  <link rel="stylesheet" href="http://turbo87.github.io/leaflet-sidebar/src/L.Control.Sidebar.css" />
+  <!--Leaflet Control Search plugin CSS-->
+  <link rel="stylesheet" href="http://labs.easyblog.it/maps/leaflet-search/src/leaflet-search.css" />
+
+  <!--Leaflet JS-->
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+  <!--Esri-Leaflet JS-->
+  <script src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet/1.0.0-rc.6/esri-leaflet.js"></script>
+  <!--Leaflet Sidebar plugin JS-->
+  <script src="http://turbo87.github.io/leaflet-sidebar/src/L.Control.Sidebar.js"></script>
+
+
+  <!--Angular application script-->
+  <script src="js/app.js"></script>
+  <!--Angular controllers-->
+  <script src="js/controllers.js"></script>
+    <!--Custom Theme CSS-->
+  <link rel="stylesheet" href="css/theme.css" />
+
+</head>
+
+<body data-ng-controller="mapCtrl" data-ng-controller="sidebarCtrl">
+
+  <div id="sidebar" class="container">
+    <h3 style="color: green"><b>Hudson County Planning Board</b></h3>
+    <div data-ng-controller="routeController">
+
+      <tabset>
+        <tab ng-repeat="t in tabs" heading="{{t.heading}}" select="go(t.route)" active="t.active">
+        </tab>
+      </tabset>
+      <h2>View:</h2>
+      <div ui-view></div>
+    </div>
+
+  </div>
+
+  <div id="map"></div>
+  <div id="info-pane" class="leaflet-bar">
+    <img id="logo" src="http://gis.hcnj.us/images/HC_AGOL_Logo_WhiteFill.png" height=100px width=100px>
+  </div>
+
+</body>
+
+
+</html>

@@ -39,6 +39,9 @@ pbApp.controller('feesCtrl', function ($scope) {
 	  "telecom": {
 		  "fee": 500
 	  },
+	  "jd": {
+	  	  "fee": 100
+	  },
 	  "appselected": ""
   };
   
