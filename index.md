@@ -5,7 +5,7 @@ published: true
 ---
 
 ### About me
-I'm a GIS specialist and assistant planner for the [Division of Planning](http://www.hudsoncountynj.org/about-the-division-of-planning/) of Hudson County, New Jersey. I'm also finishing up a Master's degree in urban planning at [Hunter College](http://hunteruap.org/).
+I'm a GIS analyst for the MTA's Metro-North. I've also got a master of urban planning degree courtesy of [Hunter College](http://hunteruap.org/).
 
 ### About this site
 This site is for my own personal development, as well as a bit of fun. It's always going to be a work in progress, so some pages may look polished, but then you might click on a link and get a 404 error.
