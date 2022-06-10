@@ -4,11 +4,11 @@ html {
 	width: 100%;
 	background-color: hsla(200,40%,30%,.4);
 	background-image:		
-		url('../assets/1-train-540-revised.png'), 
-		url('../assets/2-track.png'),
-		url('../assets/3-local-buildings.png'),
-		url('../assets/4-cloud.png'),
-		url('../assets/5-skyline.png');
+		url('/assets/1-train-540-revised.png'), 
+		url('/assets/2-track.png'),
+		url('/assets/3-local-buildings.png'),
+		url('/assets/4-cloud.png'),
+		url('/assets/5-skyline.png');
 	background-repeat: repeat-x;
 	background-position: 
 		0 100%,
