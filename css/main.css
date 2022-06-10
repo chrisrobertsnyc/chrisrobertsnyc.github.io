@@ -1,14 +1,14 @@
 html {
 	height: 100%;
-	/* max-height: 600px; */
+	/* max-height: 600px; rr*/
 	width: 100%;
 	background-color: hsla(200,40%,30%,.4);
 	background-image:		
-		url('https://i.ibb.co/nCyTP79/1-train-540-revised.png'), 
-		url('https://i.ibb.co/sV3zVxB/2-track.png'),
-		url('https://i.ibb.co/HqWNn2V/3-local-buildings.png'),
-		url('https://i.ibb.co/MNZdR9q/4-cloud.png'),
-		url('https://i.ibb.co/2MHHc0n/5-skyline.png');
+		url('../assets/1-train-540-revised.png'), 
+		url('../assets/2-track.png'),
+		url('../assets/3-local-buildings.png'),
+		url('../assets/4-cloud.png'),
+		url('../assets/5-skyline.png');
 	background-repeat: repeat-x;
 	background-position: 
 		0 100%,
